@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SE1 — Révision Contrôle Complet | وصال</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;--surf:#0f1420;--surf2:#151d2e;--surf3:#1c2740;
+  --bord:#253050;--text:#d4e2ff;--muted:#6b80a8;
+  --c1:#00c8ff;--c2:#ff6b35;--c3:#3ddc84;--c4:#c792ea;--c5:#ffcb6b;--c6:#f07178;
+  --r:10px;
+}
+.light{
+  --bg:#f0f4ff;--surf:#ffffff;--surf2:#e8eef8;--surf3:#dde6f5;
+  --bord:#c5d3e8;--text:#1a2540;--muted:#4a5f80;
+}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;min-height:100vh;transition:background .3s,color .3s}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#050a18,#0d1a35,#060d20);border-bottom:2px solid var(--c1);padding:16px 20px;position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.hdr-title{display:flex;align-items:center;gap:12px}
+.hdr-title h1{font-size:1.15rem;color:#fff;font-weight:800;letter-spacing:-0.3px}
+.hdr-title p{font-size:0.7rem;color:rgba(255,255,255,.5);margin-top:2px}
+.badge{background:var(--c1);color:#000;border-radius:5px;padding:2px 8px;font-size:.65rem;font-weight:800;margin-left:8px}
+.badge-warn{background:var(--c2)}
+.ctrls{display:flex;gap:6px;flex-wrap:wrap}
+.btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:7px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:'Sora',sans-serif}
+.btn:hover,.btn.on{background:var(--c1);color:#000;border-color:var(--c1)}
+/* TABS */
+.tabs{display:flex;gap:3px;padding:10px 20px 0;background:var(--surf);border-bottom:1px solid var(--bord);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:9px 16px;border-radius:7px 7px 0 0;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--muted);white-space:nowrap;border:1px solid transparent;border-bottom:none;transition:all .2s}
+.tab:hover{color:var(--text);background:var(--surf2)}
+.tab.on{background:var(--bg);color:var(--c1);border-color:var(--bord);border-bottom-color:var(--bg);margin-bottom:-1px}
+/* BODY */
+.body{padding:20px;max-width:1100px;margin:0 auto}
+.sec{display:none}.sec.on{display:block}
+/* CARD */
+.card{background:var(--surf);border:1px solid var(--bord);border-radius:var(--r);padding:18px;margin-bottom:18px}
+.card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bord)}
+.card-ico{font-size:1.3rem}
+.card-ttl{font-size:1rem;font-weight:800;color:var(--c1)}
+.card-ttl.orange{color:var(--c2)}
+.card-ttl.green{color:var(--c3)}
+.card-ttl.purple{color:var(--c4)}
+.card-ttl.gold{color:var(--c5)}
+/* DEF BOX */
+.def{background:var(--surf2);border-left:4px solid var(--c1);padding:11px 15px;border-radius:0 8px 8px 0;margin:8px 0;font-size:.88rem;line-height:1.7}
+.def.orange{border-left-color:var(--c2)}
+.def.green{border-left-color:var(--c3)}
+.def.purple{border-left-color:var(--c4)}
+.def.gold{border-left-color:var(--c5)}
+.def.red{border-left-color:var(--c6)}
+.def strong{color:var(--c1)}
+.def.orange strong{color:var(--c2)}
+.def.green strong{color:var(--c3)}
+.def.purple strong{color:var(--c4)}
+.def.gold strong{color:var(--c5)}
+/* FORMULA */
+.form{background:#04111e;border:1px solid var(--c1);border-radius:9px;padding:12px 16px;margin:8px 0;font-family:'JetBrains Mono',monospace}
+.light .form{background:#e0f0ff;border-color:#0078c8}
+.form .lbl{display:block;font-size:.7rem;color:var(--muted);font-family:'Sora',sans-serif;margin-bottom:4px}
+.form .eq{color:var(--c5);font-size:.95rem;font-weight:700}
+/* CHIP */
+.chip{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.72rem;font-weight:700;margin:2px}
+.c-b{background:rgba(0,200,255,.12);color:var(--c1);border:1px solid rgba(0,200,255,.3)}
+.c-o{background:rgba(255,107,53,.12);color:var(--c2);border:1px solid rgba(255,107,53,.3)}
+.c-g{background:rgba(61,220,132,.12);color:var(--c3);border:1px solid rgba(61,220,132,.3)}
+.c-p{background:rgba(199,146,234,.12);color:var(--c4);border:1px solid rgba(199,146,234,.3)}
+.c-y{background:rgba(255,203,107,.12);color:var(--c5);border:1px solid rgba(255,203,107,.3)}
+.c-r{background:rgba(240,113,120,.12);color:var(--c6);border:1px solid rgba(240,113,120,.3)}
+/* ALERT */
+.al{padding:9px 13px;border-radius:8px;margin:8px 0;font-size:.83rem}
+.al-w{background:rgba(255,203,107,.1);border:1px solid rgba(255,203,107,.35);color:var(--c5)}
+.al-i{background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.3);color:var(--c1)}
+.al-g{background:rgba(61,220,132,.08);border:1px solid rgba(61,220,132,.3);color:var(--c3)}
+.al-r{background:rgba(240,113,120,.08);border:1px solid rgba(240,113,120,.3);color:var(--c6)}
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:680px){.g2,.g3{grid-template-columns:1fr}}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0}
+.tbl th{background:var(--c1);color:#000;padding:7px 9px;text-align:center;font-weight:800}
+.tbl td{border:1px solid var(--bord);padding:6px 9px;text-align:center}
+.tbl tr:nth-child(even) td{background:var(--surf2)}
+.fault{background:rgba(240,113,120,.18)!important;color:var(--c6)!important;font-weight:800}
+.hit{background:rgba(61,220,132,.1)!important;color:var(--c3)!important}
+.evict{background:rgba(255,107,53,.12)!important;color:var(--c2)!important}
+/* GANTT */
+.g-wrap{overflow-x:auto;margin:10px 0}
+.g-cont{min-width:500px}
+.g-row{display:flex;align-items:center;margin:3px 0}
+.g-lbl{width:55px;font-size:.78rem;color:var(--muted);font-weight:700;flex-shrink:0}
+.g-blk{height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;flex-shrink:0;color:#fff}
+.g-tick{font-size:.62rem;color:var(--muted);text-align:center}
+/* EXAM QUESTIONS */
+.eq-card{background:var(--surf);border:1px solid var(--bord);border-radius:var(--r);margin-bottom:16px;overflow:hidden}
+.eq-hdr{background:var(--surf2);padding:11px 16px;display:flex;align-items:center;gap:10px}
+.eq-num{background:var(--c1);color:#000;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.8rem;flex-shrink:0}
+.eq-txt{font-weight:700;font-size:.88rem;flex:1;line-height:1.5}
+.eq-pts{color:var(--c5);font-weight:800;font-size:.83rem;white-space:nowrap}
+.eq-body{padding:14px 16px}
+.ans-btn{background:var(--c1);color:#000;border:none;padding:7px 16px;border-radius:7px;cursor:pointer;font-weight:800;font-size:.78rem;margin-top:10px;font-family:'Sora',sans-serif}
+.ans-box{display:none;margin-top:10px;background:var(--surf2);border:1px solid var(--c3);border-radius:8px;padding:12px}
+.ans-box.show{display:block}
+/* ARABIC */
+.ar{font-family:'Tajawal',sans-serif;direction:rtl;text-align:right}
+.lang-ar{display:none}
+body.show-ar .lang-ar{display:block}
+body.show-ar .lang-fr{display:none}
+/* STATE SVG */
+svg text{font-family:'Sora',sans-serif}
+/* SCROLL TOP */
+.stb{position:fixed;bottom:20px;right:20px;background:var(--c1);color:#000;width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;font-size:1.1rem;font-weight:900;z-index:500;box-shadow:0 4px 14px rgba(0,200,255,.4)}
+p{line-height:1.75;margin-bottom:6px;font-size:.88rem}
+h3{color:var(--c2);font-size:.95rem;margin:14px 0 7px}
+h4{color:var(--text);font-size:.87rem;margin:10px 0 5px;font-weight:700}
+ul,ol{padding-left:18px}
+li{line-height:1.8;font-size:.86rem}
+code{background:var(--surf3);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--c5)}
+.imp{color:var(--c5);font-weight:800}
+/* SECTION HEADER PILL */
+.sec-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surf2);border:1px solid var(--bord);border-radius:20px;padding:5px 14px;font-size:.78rem;font-weight:700;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-title">
+    <div>🖥️</div>
+    <div>
+      <h1>SE1 — Révision Complète Contrôle <span class="badge">CSV-8</span><span class="badge badge-warn">EXAM FOCUS</span></h1>
+      <p>Ch2: Processus + Ordonnancement · Ch4: Mémoire · Ch3: Interruptions (cours) · Constantine 2 · L2 Info</p>
+    </div>
+  </div>
+  <div class="ctrls">
+    <button class="btn on" onclick="setLang('fr')" id="bfr">🇫🇷 FR</button>
+    <button class="btn" onclick="setLang('ar')" id="bar">🇩🇿 AR عربي</button>
+    <button class="btn" onclick="toggleTheme()" id="bthm">☀️ Light</button>
+  </div>
+</div>
+<div class="tabs" id="navT">
+  <div class="tab on" onclick="gotoTab('ch2')" id="t-ch2">⚙️ Ch2: Processus</div>
+  <div class="tab" onclick="gotoTab('ch4m')" id="t-ch4m">🧮 Ch4: Mémoire</div>
+  <div class="tab" onclick="gotoTab('ch3i')" id="t-ch3i">⚡ Ch3: Interruptions</div>
+  <div class="tab" onclick="gotoTab('calc')" id="t-calc">🔢 Formules</div>
+  <div class="tab" onclick="gotoTab('exam')" id="t-exam">📝 Examen Entraînement</div>
+</div>
+<div class="body">
+
+<!-- ===================== CH2: PROCESSUS ===================== -->
+<div class="sec on" id="ch2">
+ <div class="lang-fr">
+  <div class="sec-pill">⚙️ Chapitre 2 — Gestion des Processus &amp; Ordonnancement <span class="badge">Cours + TD</span></div>
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">📌</span><span class="card-ttl">Programme vs Processus &amp; PCB</span></div>
+   <div class="g2">
+    <div>
+     <div class="def"><strong>Programme :</strong> Fichier statique sur disque. Entité passive.</div>
+     <div class="def orange" style="margin-top:8px"><strong>Processus :</strong> Programme <em>en cours d'exécution</em>. Entité dynamique avec : code, données, pile, registres, et son propre <strong>PCB</strong>.<br>Un programme → plusieurs processus possible.</div>
+    </div>
+    <div>
+     <div class="def purple"><strong>PCB — Process Control Block :</strong><br>Structure de données qui contient <em>tout</em> sur le processus :<br>• PID (identifiant unique)<br>• État courant (Prêt/Actif/Bloqué...)<br>• Valeurs des registres CPU<br>• Compteur ordinal (prochaine instruction)<br>• Priorité, table de pages, ressources allouées<br><span class="imp">→ Le PCB est la carte d'identité du processus</span></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🔄</span><span class="card-ttl">Les 5 États d'un Processus</span></div>
+   <svg viewBox="0 0 700 200" style="width:100%;max-width:680px;display:block;margin:0 auto">
+    <defs><marker id="a1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#00c8ff"/></marker></defs>
+    <ellipse cx="65" cy="100" rx="55" ry="26" fill="#0f1420" stroke="#00c8ff" stroke-width="2"/>
+    <text x="65" y="96" text-anchor="middle" fill="#00c8ff" font-size="10" font-weight="700">Nouveau</text>
+    <text x="65" y="110" text-anchor="middle" fill="#6b80a8" font-size="8">New</text>
+    <ellipse cx="220" cy="55" rx="55" ry="26" fill="#0f1420" stroke="#3ddc84" stroke-width="2"/>
+    <text x="220" y="51" text-anchor="middle" fill="#3ddc84" font-size="10" font-weight="700">Prêt</text>
+    <text x="220" y="65" text-anchor="middle" fill="#6b80a8" font-size="8">Ready</text>
+    <ellipse cx="390" cy="55" rx="55" ry="26" fill="#0f1420" stroke="#ff6b35" stroke-width="2"/>
+    <text x="390" y="51" text-anchor="middle" fill="#ff6b35" font-size="10" font-weight="700">Actif</text>
+    <text x="390" y="65" text-anchor="middle" fill="#6b80a8" font-size="8">Running</text>
+    <ellipse cx="390" cy="155" rx="55" ry="26" fill="#0f1420" stroke="#c792ea" stroke-width="2"/>
+    <text x="390" y="151" text-anchor="middle" fill="#c792ea" font-size="10" font-weight="700">Bloqué</text>
+    <text x="390" y="165" text-anchor="middle" fill="#6b80a8" font-size="8">Waiting</text>
+    <ellipse cx="580" cy="100" rx="55" ry="26" fill="#0f1420" stroke="#f07178" stroke-width="2"/>
+    <text x="580" y="96" text-anchor="middle" fill="#f07178" font-size="10" font-weight="700">Terminé</text>
+    <text x="580" y="110" text-anchor="middle" fill="#6b80a8" font-size="8">Exit</text>
+    <!-- Arrows -->
+    <line x1="120" y1="88" x2="165" y2="68" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a1)"/>
+    <text x="122" y="73" fill="#6b80a8" font-size="8">admission</text>
+    <line x1="275" y1="55" x2="335" y2="55" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a1)"/>
+    <text x="283" y="46" fill="#6b80a8" font-size="8">dispatch</text>
+    <line x1="335" y1="65" x2="275" y2="65" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a1)"/>
+    <text x="278" y="79" fill="#6b80a8" font-size="8">préemption/RR</text>
+    <line x1="390" y1="81" x2="390" y2="129" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a1)"/>
+    <text x="395" y="110" fill="#6b80a8" font-size="8">E/S wait</text>
+    <line x1="345" y1="145" x2="260" y2="75" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a1)"/>
+    <text x="274" y="116" fill="#6b80a8" font-size="8">E/S done</text>
+    <line x1="445" y1="68" x2="525" y2="88" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a1)"/>
+    <text x="462" y="72" fill="#6b80a8" font-size="8">fin/exit</text>
+   </svg>
+   <div class="al al-i" style="margin-top:10px">📌 Un seul processus est <strong>Actif</strong> à la fois (mono-CPU). Plusieurs peuvent être Prêts ou Bloqués simultanément.</div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🏛️</span><span class="card-ttl">Les 3 Niveaux d'Ordonnanceurs + Dispatcher</span></div>
+   <div class="g3">
+    <div class="def"><strong>🔴 Long Terme (LTS)</strong><br>Charge les programmes du disque → MC. Crée les PCBs. Insère dans LISTE_PRETS.<br><em>Applique : FIFO ou SJF</em><br>Contrôle le degré de multiprogrammation.</div>
+    <div class="def orange"><strong>🟡 Moyen Terme (MTS)</strong><br>Décharge (swap out) / recharge (swap in) des processus entre MC et disque.<br>Utilisé quand la MC est saturée.</div>
+    <div class="def green"><strong>🟢 Court Terme (STS)</strong><br>Choisit quel processus Prêt → CPU. Très fréquent (ms).<br><em>Applique : FCFS, SJF, RR, Priorités...</em></div>
+   </div>
+   <div class="def purple" style="margin-top:10px"><strong>⚡ Dispatcher (Répartiteur) :</strong><br>
+   Programme système qui <em>donne concrètement le CPU</em> au processus sélectionné par le STS.<br>
+   Étapes : (1) PROCESSUS_COURANT ← @PCB du processus actif (2) Charge registres CPU depuis PCB (3) Charge compteur ordinal (4) Passe en mode Esclave.<br>
+   <span class="imp">→ En multiprocesseur : CPU1 en priorité, puis CPU2. C'est toujours le Dispatcher qui oriente.</span></div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">📊</span><span class="card-ttl">Critères de Performance — Formules Exactes</span></div>
+   <div class="g2">
+    <div>
+     <div class="form"><span class="lbl">⏱ Turnaround (Temps de Traitement / TT)</span><span class="eq">TT = Temps_Fin - Temps_Arrivée</span></div>
+     <p style="font-size:.78rem;color:var(--muted);margin-left:4px">Ou : TT = attente chargement MC + attente file Prêts + exécution + E/S</p>
+     <div class="form"><span class="lbl">⏳ Waiting Time (Temps d'Attente / TA)</span><span class="eq">TA = TT - Burst_Time</span></div>
+     <p style="font-size:.78rem;color:var(--muted);margin-left:4px">= Somme des temps passés dans la file des Prêts</p>
+    </div>
+    <div>
+     <div class="form"><span class="lbl">⚡ Response Time (Temps de Réponse / TR)</span><span class="eq">TR = Temps_Début_Exécution - Temps_Arrivée_MC</span></div>
+     <p style="font-size:.78rem;color:var(--muted);margin-left:4px">= Temps avant <em>premier</em> passage CPU. Important pour systèmes interactifs.</p>
+     <div class="form"><span class="lbl">📊 Moyennes</span><span class="eq">TMT = Σ TT_i / N &nbsp;&nbsp; TMA = Σ TA_i / N</span></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🔢</span><span class="card-ttl">Algorithmes d'Ordonnancement — Tous les Cas</span></div>
+
+   <h3>① FCFS — First Come First Served (Non-préemptif)</h3>
+   <div class="def">Premier arrivé, premier servi. Liste FIFO des Prêts. <span class="c-r chip">Défaut</span> Effet convoi : un long processus bloque tout le monde.<br>
+   <strong>Exemple du cours :</strong> P1(24), P2(3), P3(3) → ordre FCFS : P1→P2→P3 = TT_moy = (24+27+30)/3 = 27<br>
+   Si ordre SJF : P2→P3→P1 = TT_moy = 13 → <span class="imp">FCFS est très sensible à l'ordre d'arrivée</span></div>
+
+   <h3>② SJF — Shortest Job First (Non-préemptif) ⭐ TRÈS FRÉQUENT EXAM</h3>
+   <div class="def orange">Parmi les processus Prêts → choisir celui avec le <strong>burst_time le plus court</strong>. Égalité → FCFS.<br>
+   <span class="imp">Optimal pour minimiser le temps moyen d'attente.</span><br>
+   <strong>Exemple du cours :</strong> P1(6), P2(3), P3(8), P4(7) → ordre SJF : P2(3)→P1(6)→P4(7)→P3(8)<br>
+   Gantt : 0——3——9——16——24 → TT_moy = (9-0)+(3-0)+(24-0)+(16-0))/4 = 13</div>
+
+   <h3>③ SRTF — Shortest Remaining Time First (Préemptif = SJF préemptif)</h3>
+   <div class="def green">À chaque arrivée d'un nouveau processus → comparer son burst avec le temps <em>restant</em> du processus Actif. Si nouveau &lt; restant → préemption.<br>
+   <strong>Exemple cours :</strong> P1(0,8) P2(1,4) P3(2,9) P4(3,5) → TT_moy = ((17-0)+(5-1)+(26-2)+(10-3))/4 = 13<br>
+   <em>FCFS même cas = 15.25 → SRTF meilleur</em></div>
+
+   <h3>④ Priorités Non-Préemptif / Préemptif</h3>
+   <div class="def purple">Chaque processus a une priorité (0 = plus haute). <span class="c-r chip">Problème : Famine (Starvation)</span> → un processus de basse priorité peut attendre indéfiniment.<br>
+   <span class="c-g chip">Solution : Vieillissement (Aging)</span> — la priorité augmente avec le temps d'attente.<br>
+   SRTF = Priorité préemptive où priorité = 1/burst_restant</div>
+
+   <h3>⑤ Round Robin — RR (Préemptif) ⭐ Quantum</h3>
+   <div class="def gold"><strong>Quantum q :</strong> chaque processus reçoit q unités de CPU. S'il ne finit pas → retour en fin de LISTE_PRETS. Déclenché par interruption d'horloge.<br>
+   <strong>Exemple cours :</strong> P1(17), P2(3), P3(4), P4(2), Quantum=4<br>
+   Gantt : P1(0-4), P2(4-7), P3(7-11), P4(11-13), P1(13-17), P1(17-21)...<br>
+   <span class="c-y chip">Équitable</span> <span class="c-r chip">Plus de commutations de contexte</span><br>
+   Petit quantum → meilleur TR mais overhead élevé. Grand quantum → comme FCFS.</div>
+
+   <h3>⑥ Files Multi-niveaux (sans / avec feedback)</h3>
+   <div class="def">
+   <strong>Sans feedback :</strong> processus assigné définitivement à une file (Foreground/Background). Chaque file a sa politique (RR pour Foreground, FCFS pour Background). Préemption entre niveaux.<br>
+   <strong>Avec feedback :</strong> processus peut changer de file selon son comportement. Quantum croissant par niveau. Favorise les processus courts (interactifs).
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🎓</span><span class="card-ttl orange">Exemple Complet TD7 — Exercice Type Exam ⭐</span></div>
+   <p>8 processus, mémoire 12MB, partitions variables, Best-Fit, LTS=FIFO, STS=SJF :</p>
+   <div class="g-wrap">
+   <table class="tbl">
+    <tr><th>Pgm</th><th>Demande t=</th><th>Burst</th><th>Taille</th></tr>
+    <tr><td>P1</td><td>0</td><td>9</td><td>3MB</td></tr>
+    <tr><td>P2</td><td>4</td><td>6</td><td>5MB</td></tr>
+    <tr><td>P3</td><td>6</td><td>4</td><td>5MB</td></tr>
+    <tr><td>P4</td><td>8</td><td>2</td><td>4MB</td></tr>
+    <tr><td>P5</td><td>10</td><td>4</td><td>1MB</td></tr>
+    <tr><td>P6</td><td>12</td><td>5</td><td>1MB</td></tr>
+    <tr><td>P7</td><td>16</td><td>3</td><td>1MB</td></tr>
+    <tr><td>P8</td><td>18</td><td>3</td><td>3MB</td></tr>
+   </table>
+   </div>
+   <div class="al al-i">📌 MC = 12MB. LTS charge dans l'ordre d'arrivée (FIFO). Best-Fit choisit la plus petite zone libre suffisante. STS choisit parmi les prêts le plus court (SJF).</div>
+   
+   <h3>Résolution — Image mémoire &amp; Chargement :</h3>
+   <div class="def green">
+   <strong>t=0 :</strong> P1 arrive, 12MB libre → chargé (3MB). Reste 9MB libre.<br>
+   <strong>t=4 :</strong> P2(5MB) arrive, 9MB libre → chargé. Reste 4MB.<br>
+   <strong>t=6 :</strong> P3(5MB) arrive, 4MB libre → PAS de place → attend en File1.<br>
+   <strong>t=8 :</strong> P4(4MB) arrive. 4MB libre → Best-Fit → P4 chargé. Plus de place libre!<br>
+   <strong>t=9 :</strong> P1 termine (burst=9) → 3MB libérées. P3 attend toujours (besoin 5MB, dispo 3MB seulement).<br>
+   <strong>t=10 :</strong> P5(1MB) arrive. 3MB libre → chargé.<br>
+   <strong>t=12 :</strong> P6(1MB) arrive. 2MB libre → chargé.<br>
+   <strong>t=10 :</strong> P2 termine (arrivé t=4, burst=6 → fin=10) → 5MB libérées. P3(5MB) peut entrer → chargé!<br>
+   </div>
+
+   <h3>Diagramme de Gantt — SJF Court Terme :</h3>
+   <div class="g-wrap">
+   <div class="g-cont">
+    <div class="g-row">
+     <div class="g-lbl">CPU</div>
+     <div style="display:flex">
+      <div class="g-blk" style="width:90px;background:#ff6b35" title="P1: 0→9">P1 (0-9)</div>
+      <div class="g-blk" style="width:20px;background:#253050;font-size:.55rem" title="SJF choix">→</div>
+      <div class="g-blk" style="width:20px;background:#c792ea" title="P4: 9→11">P4</div>
+      <div class="g-blk" style="width:10px;background:#253050"></div>
+      <div class="g-blk" style="width:40px;background:#3ddc84;color:#000" title="P5: 11→15">P5</div>
+      <div class="g-blk" style="width:40px;background:#00c8ff;color:#000" title="P3: 15→19">P3</div>
+      <div class="g-blk" style="width:30px;background:#ffcb6b;color:#000" title="P7:...">P7</div>
+      <div class="g-blk" style="width:50px;background:#f07178" title="P2 area">P2</div>
+      <div class="g-blk" style="width:30px;background:#c792ea;opacity:.7">P8</div>
+      <div class="g-blk" style="width:50px;background:#ff6b35;opacity:.7">P6</div>
+     </div>
+    </div>
+    <div class="g-row">
+     <div class="g-lbl"></div>
+     <div style="display:flex">
+      <div class="g-tick" style="width:90px">0────9</div>
+      <div class="g-tick" style="width:30px">→11</div>
+      <div class="g-tick" style="width:50px">→15</div>
+      <div class="g-tick" style="width:40px">→19</div>
+      <div class="g-tick" style="width:80px">→ ...</div>
+     </div>
+    </div>
+   </div>
+   </div>
+   <div class="al al-w">⚠️ STS SJF : à t=9 (P1 fini), processus Prêts en MC = P2(burst=6), P4(burst=2) → SJF choisit P4(2). Ensuite P5(4) si chargé, puis P3(4), puis P2(6)...</div>
+
+   <h3>Tableau des Temps :</h3>
+   <div class="g-wrap">
+   <table class="tbl">
+    <tr><th>Process</th><th>Arrivée MC</th><th>Fin</th><th>Burst</th><th class="hit">TT = Fin-Arr</th><th class="hit">TR = Début-Arr</th><th class="hit">TA = TT-Burst</th></tr>
+    <tr><td>P1</td><td>0</td><td>9</td><td>9</td><td class="hit">9</td><td class="hit">0</td><td class="hit">0</td></tr>
+    <tr><td>P2</td><td>4</td><td>~</td><td>6</td><td class="evict">calculé</td><td class="evict">calculé</td><td class="evict">calculé</td></tr>
+    <tr><td>P4</td><td>8</td><td>11</td><td>2</td><td class="hit">3</td><td class="hit">1</td><td class="hit">1</td></tr>
+   </table>
+   </div>
+   <div class="al al-g">💡 À l'examen : construire d'abord l'image mémoire complète (quand chaque processus entre/sort), puis déduire le Gantt SJF, puis calculer les temps.</div>
+  </div>
+ </div><!-- lang-fr -->
+
+ <div class="lang-ar ar">
+  <div class="card">
+   <div class="card-hdr" style="flex-direction:row-reverse"><span class="card-ico">⚙️</span><span class="card-ttl">الفصل 2 — إدارة العمليات والجدولة</span></div>
+   <div class="def"><strong>البرنامج:</strong> ملف ثابت على القرص. <strong>العملية:</strong> برنامج قيد التنفيذ، كيان ديناميكي يملك PCB وذاكرة مخصصة.</div>
+   <h3>حالات العملية الخمس</h3>
+   <ul>
+    <li><span class="c-b chip">جديدة</span> — تم إنشاؤها وتحميلها في الذاكرة</li>
+    <li><span class="c-g chip">جاهزة (Prêt)</span> — تملك كل الموارد عدا المعالج</li>
+    <li><span class="c-o chip">نشطة (Actif)</span> — تستخدم المعالج الآن</li>
+    <li><span class="c-p chip">محجوبة (Bloqué)</span> — تنتظر عملية إدخال/إخراج</li>
+    <li><span class="c-r chip">منتهية</span> — أنهت تنفيذها</li>
+   </ul>
+   <h3>خوارزميات الجدولة</h3>
+   <ul>
+    <li><strong>FCFS</strong> — الأول وصولاً، الأول خدمةً. بسيط لكن يسبب تأثير القافلة.</li>
+    <li><strong>SJF ⭐</strong> — أقصر مهمة أولاً (بدون استباق). الأمثل لتقليل زمن الانتظار.</li>
+    <li><strong>SRTF</strong> — نسخة SJF مع استباق. يقارن الوقت المتبقي.</li>
+    <li><strong>الأولويات</strong> — الأعلى أولوية أولاً. مشكلة: المجاعة → حل: التشيخ (Aging).</li>
+    <li><strong>Round Robin ⭐</strong> — كل عملية تحصل على حصة زمنية (quantum). عادل لكن أكثر تبديلاً للسياق.</li>
+   </ul>
+   <h3>الصيغ الأساسية</h3>
+   <div class="form"><span class="lbl">زمن المعالجة</span><span class="eq">TT = وقت الانتهاء - وقت الوصول للذاكرة</span></div>
+   <div class="form"><span class="lbl">زمن الانتظار</span><span class="eq">TA = TT - زمن التنفيذ</span></div>
+   <div class="form"><span class="lbl">زمن الاستجابة</span><span class="eq">TR = وقت أول تنفيذ - وقت الوصول</span></div>
+  </div>
+ </div>
+</div>
+
+<!-- ===================== CH4: MEMOIRE ===================== -->
+<div class="sec" id="ch4m">
+ <div class="lang-fr">
+  <div class="sec-pill">🧮 Chapitre 4 — Gestion de la Mémoire Centrale <span class="badge">Cours + TD</span><span class="badge badge-warn">8 pts exam</span></div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">📍</span><span class="card-ttl">Adressage : Logique vs Physique</span></div>
+   <div class="g2">
+    <div>
+     <div class="def"><strong>Adresse Logique :</strong> Adresse vue par le CPU/processus. Générée par le programme.</div>
+     <div class="def orange" style="margin-top:8px"><strong>Adresse Physique :</strong> Adresse réelle dans la RAM. Vue par l'unité de gestion mémoire (MMU).</div>
+     <div class="form" style="margin-top:8px"><span class="lbl">Conversion (allocation contiguë)</span><span class="eq">Adresse_Physique = Adresse_Logique + Base</span></div>
+    </div>
+    <div>
+     <div class="def green"><strong>MMU (Memory Management Unit) :</strong> Circuit matériel qui fait la traduction adresse logique → physique automatiquement.</div>
+     <div class="al al-i" style="margin-top:8px">💡 Synonymes MC : RAM = Mémoire Vive = Mémoire Principale = Mémoire Physique = Mémoire Centrale</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🏗️</span><span class="card-ttl">Allocation Contiguë — Partitions</span></div>
+   <div class="g2">
+    <div>
+     <h3>🔒 Partitions Fixes (Statiques)</h3>
+     <div class="def">Mémoire divisée en N partitions au démarrage. Taille fixe (égale ou non). Chaque partition = 1 processus max.<br>
+     <span class="c-r chip">Fragmentation INTERNE</span> espace perdu À L'INTÉRIEUR de la partition.<br>
+     <strong>Problème file :</strong> processus attend même si autre partition libre.<br>
+     <span class="c-g chip">Solution</span> File unique + Best Fit (choisir la + petite partition libre suffisante)</div>
+    </div>
+    <div>
+     <h3>🔄 Partitions Variables (Dynamiques)</h3>
+     <div class="def orange">Partitions créées selon la taille exacte du processus.<br>
+     <span class="c-r chip">Fragmentation EXTERNE</span> trous éparpillés, chacun trop petit.<br>
+     <span class="c-g chip">Solution : Compactage</span> déplacer les processus pour fusionner les trous. Coûteux (arrêt de l'exécution).<br>
+     <strong>Algorithmes de placement :</strong><br>
+     • <span class="c-b chip">First Fit</span> : 1er trou suffisant<br>
+     • <span class="c-g chip">Best Fit</span> : + petit trou suffisant<br>
+     • <span class="c-r chip">Worst Fit</span> : + grand trou<br>
+     • <span class="c-p chip">Next Fit</span> : First Fit depuis la dernière position</div>
+    </div>
+   </div>
+
+   <h3>Exemple TD — Best Fit / First Fit</h3>
+   <div class="def">Trous libres : 100Ko, 500Ko, 200Ko, 300Ko, 600Ko<br>
+   Processus : A(212Ko), B(417Ko), C(112Ko), D(426Ko)<br>
+   <strong>First Fit :</strong> A→500Ko, B→500Ko(reste 83), C→200Ko, D→600Ko<br>
+   <strong>Best Fit :</strong> A→300Ko(reste 88), B→500Ko(reste 83), C→200Ko(reste 88), D→600Ko(reste 174)<br>
+   <span class="imp">Best Fit = meilleure utilisation de la mémoire dans cet exemple</span></div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">📄</span><span class="card-ttl green">Pagination ⭐ Cœur de l'examen</span></div>
+   <div class="def green"><strong>Principe :</strong> MC divisée en <strong>cases (frames)</strong> de taille fixe. Processus divisé en <strong>pages</strong> de même taille. Une page → n'importe quelle case libre.<br>
+   <span class="c-g chip">Avantage</span> Pas de fragmentation externe. <span class="c-y chip">Inconvénient</span> Fragmentation interne possible (dernière page).</div>
+
+   <div class="g2">
+    <div>
+     <div class="form"><span class="lbl">Numéro de page (N°P)</span><span class="eq">N°P = Adresse DIV Taille_Page</span></div>
+     <div class="form"><span class="lbl">Déplacement / Offset (d)</span><span class="eq">d = Adresse MOD Taille_Page</span></div>
+     <div class="form"><span class="lbl">Adresse physique</span><span class="eq">@Phys = (N°Case × Taille_Page) + d</span></div>
+     <div class="form"><span class="lbl">Nombre de pages d'un processus</span><span class="eq">Nb_Pages = ⌈ Taille_Proc / Taille_Page ⌉</span></div>
+     <div class="form"><span class="lbl">Fragmentation interne (dernière page)</span><span class="eq">Frag = Taille_Page − (Taille_Proc MOD Taille_Page)<br><span style="font-size:.75em;color:var(--muted)">Si MOD=0 → Frag_interne = 0</span></span></div>
+    </div>
+    <div>
+     <h3>Exemple TD3 Exercice 3</h3>
+     <div class="def orange">MC = 10 cases, taille case = 1000 mots.<br>P1=1600 mots, P2=3000 mots, P3=1000 mots<br><br>
+     <strong>P1 :</strong> ⌈1600/1000⌉ = <span class="imp">2 pages</span>. Gaspillage = 2000−1600 = <span class="imp">400 mots</span><br>
+     <strong>P2 :</strong> ⌈3000/1000⌉ = <span class="imp">3 pages</span>. Gaspillage = <span class="imp">0 mots</span> (exactement 3×1000)<br>
+     <strong>P3 :</strong> ⌈1000/1000⌉ = <span class="imp">1 page</span>. Gaspillage = <span class="imp">0 mots</span></div>
+     
+     <h3>Traduction d'adresses</h3>
+     <div class="def purple">Adresse 1200 du P1 (taille page=1000) :<br>
+     N°P = 1200 ÷ 1000 = <strong>1</strong> | d = 1200 MOD 1000 = <strong>200</strong><br>
+     Table pages P1 : Page1 → Case5<br>
+     @Phys = (5×1000)+200 = <strong>5200</strong></div>
+    </div>
+   </div>
+
+   <h3>Image mémoire avec table de pages (TD3 Ex3)</h3>
+   <div class="g-wrap">
+   <table class="tbl">
+    <tr><th>N° Case</th><th>Contenu</th><th>Table P1</th><th>Table P2</th><th>Table P3</th></tr>
+    <tr><td>0</td><td>SE</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>1</td><td>Page 0 de P2</td><td>—</td><td class="hit">Case 1</td><td>—</td></tr>
+    <tr><td>2</td><td>Page 1 de P2</td><td>—</td><td class="hit">Case 2</td><td>—</td></tr>
+    <tr><td>3</td><td>Page 1 de P2</td><td>—</td><td class="hit">Case 3</td><td>—</td></tr>
+    <tr><td>4</td><td>Page 0 de P1</td><td class="hit">Case 4</td><td>—</td><td>—</td></tr>
+    <tr><td>5</td><td>Page 1 de P1</td><td class="hit">Case 5</td><td>—</td><td>—</td></tr>
+    <tr><td>6</td><td>Page 2 de P2</td><td>—</td><td class="hit">Case 6</td><td>—</td></tr>
+    <tr><td>7</td><td>Page 0 de P3</td><td>—</td><td>—</td><td class="hit">Case 7</td></tr>
+    <tr><td>8</td><td>Libre</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>9</td><td>Libre</td><td>—</td><td>—</td><td>—</td></tr>
+   </table>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🌐</span><span class="card-ttl">Segmentation</span></div>
+   <div class="def"><strong>Principe :</strong> L'espace logique est divisé en <strong>segments</strong> de taille variable (code, données, pile...). Adresse logique = (N°Segment S, Déplacement d).<br>
+   Condition validité : <code>d &lt; Limite[S]</code> → sinon : défaut de segment.<br>
+   Adresse physique = <code>Base[S] + d</code></div>
+
+   <h3>Exemple TD3 Ex4 — Segmentation</h3>
+   <div class="g-wrap">
+   <table class="tbl">
+    <tr><th>Segment</th><th>Base</th><th>Limite</th></tr>
+    <tr><td>0</td><td>219</td><td>600</td></tr>
+    <tr><td>1</td><td>2300</td><td>14</td></tr>
+    <tr><td>2</td><td>90</td><td>100</td></tr>
+    <tr><td>3</td><td>1327</td><td>580</td></tr>
+    <tr><td>4</td><td>1952</td><td>96</td></tr>
+   </table>
+   </div>
+   <div class="def orange">Calculs :<br>
+   (0,430) → Base[0]+430 = 219+430 = <strong>649</strong> ✅ (430 &lt; 600)<br>
+   (1,10) → Base[1]+10 = 2300+10 = <strong>2310</strong> ✅ (10 &lt; 14)<br>
+   (1,11) → 11 &lt; 14 → <strong>2311</strong> ✅<br>
+   (2,500) → 500 ≥ 100 → <strong class="c-r chip">ERREUR segmentation !</strong><br>
+   (3,400) → 400 &lt; 580 → 1327+400 = <strong>1727</strong> ✅<br>
+   (4,117) → 117 ≥ 96 → <strong class="c-r chip">ERREUR segmentation !</strong></div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🔄</span><span class="card-ttl green">Mémoire Virtuelle &amp; Algorithmes de Remplacement ⭐</span></div>
+   <div class="def"><strong>Pagination à la demande :</strong> on ne charge en MC que les pages nécessaires. Si une page est absente → <strong>Défaut de page (Page Fault)</strong> → chargement depuis le disque.<br>
+   Si MC pleine → il faut <strong>remplacer</strong> une page victime.</div>
+   <div class="al al-w">⚠️ Règle fondamentale : Si MC = 1 seule case → chaque référence = 1 défaut de page → Nb_Défauts = Nb_Références</div>
+
+   <h3>① FIFO — First In First Out</h3>
+   <div class="def">Remplacer la page la <strong>plus ancienne</strong> en mémoire (entrée en premier). Simple à implémenter. Peut être sous-optimal.<br>
+   <strong>Exemple cours (3 cases, chaîne: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1) : 15 défauts</strong></div>
+
+   <h3>② Optimal (OPT)</h3>
+   <div class="def orange">Remplacer la page dont la <strong>prochaine utilisation est la plus éloignée</strong> dans le futur.<br>
+   <span class="imp">Optimal → minimum de défauts possible. Mais impossible en pratique (nécessite le futur).</span><br>
+   <strong>Même exemple : 9 défauts</strong> (référence uniquement)</div>
+
+   <h3>③ LRU — Least Recently Used ⭐ EXAM</h3>
+   <div class="def green">Remplacer la page la <strong>moins récemment utilisée</strong> (la + longtemps sans être référencée).<br>
+   Bonne approximation de l'Optimal. Faisable en pratique.<br>
+   <strong>Même exemple : 12 défauts</strong></div>
+
+   <h3>④ LFU / MFU (comptage)</h3>
+   <div class="def purple"><strong>LFU :</strong> remplace la page la <strong>moins fréquemment</strong> utilisée (compteur le + petit) → 11 défauts même exemple.<br>
+   <strong>MFU :</strong> remplace la page la <strong>plus fréquemment</strong> utilisée → 14 défauts (souvent pire).</div>
+
+   <div class="al al-i">📊 Classement : OPT &lt; LFU ≤ LRU ≤ FIFO ≤ MFU (nombre de défauts, de + petit au + grand)</div>
+
+   <h3>Exemple Complet TD3 Ex5 ⭐ (Type Exam)</h3>
+   <div class="def">Programme 460 mots, page=100 mots, MC=200 mots (2 cases).<br>
+   Séquence adresses : 10, 11, 104, 170, 73, 309, 185, 245, 246, 434, 458, 364<br><br>
+   <strong>Étape 1 — Numéros de pages :</strong><br>
+   10÷100=<strong>0</strong> | 11÷100=<strong>0</strong> | 104÷100=<strong>1</strong> | 170÷100=<strong>1</strong> | 73÷100=<strong>0</strong> | 309÷100=<strong>3</strong><br>
+   185÷100=<strong>1</strong> | 245÷100=<strong>2</strong> | 246÷100=<strong>2</strong> | 434÷100=<strong>4</strong> | 458÷100=<strong>4</strong> | 364÷100=<strong>3</strong><br>
+   <strong>Chaîne pages = {0,0,1,1,0,3,1,2,2,4,4,3}</strong><br><br>
+   <strong>Mots gaspillés :</strong> Nb_pages = ⌈460/100⌉ = 5 pages (0 à 4). Dernière page (4) : 5×100=500, gaspillage = 500-460 = <strong>40 mots</strong></div>
+
+   <h3>Table LRU (2 cases, chaîne {0,0,1,1,0,3,1,2,2,4,4,3})</h3>
+   <div class="g-wrap">
+   <table class="tbl">
+    <tr><th>Ref</th><th>0</th><th>0</th><th>1</th><th>1</th><th>0</th><th>3</th><th>1</th><th>2</th><th>2</th><th>4</th><th>4</th><th>3</th></tr>
+    <tr><td><strong>Case 0</strong></td>
+     <td class="fault">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="evict">3</td><td class="evict">1</td><td class="evict">2</td><td>2</td><td class="evict">4</td><td>4</td><td class="evict">3</td></tr>
+    <tr><td><strong>Case 1</strong></td>
+     <td></td><td></td><td class="fault">1</td><td>1</td><td class="evict">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td><strong>Défaut?</strong></td>
+     <td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="fault">+</td><td class="fault">+</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td></tr>
+   </table>
+   </div>
+   <div class="al al-g">LRU → <strong>9 défauts</strong> de pages. Taux = 9/12 = 75%</div>
+
+   <h3>Table FIFO (2 cases, même chaîne)</h3>
+   <div class="g-wrap">
+   <table class="tbl">
+    <tr><th>Ref</th><th>0</th><th>0</th><th>1</th><th>1</th><th>0</th><th>3</th><th>1</th><th>2</th><th>2</th><th>4</th><th>4</th><th>3</th></tr>
+    <tr><td><strong>Case 0</strong></td>
+     <td class="fault">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="evict">3</td><td>3</td><td class="evict">2</td><td>2</td><td>2</td><td>2</td><td class="evict">3</td></tr>
+    <tr><td><strong>Case 1</strong></td>
+     <td></td><td></td><td class="fault">1</td><td>1</td><td class="evict">0</td><td>0</td><td class="evict">1</td><td>1</td><td>1</td><td class="evict">4</td><td>4</td><td>4</td></tr>
+    <tr><td><strong>Défaut?</strong></td>
+     <td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="fault">+</td><td class="fault">+</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td></tr>
+   </table>
+   </div>
+   <div class="al al-g">FIFO → <strong>9 défauts</strong> aussi dans ce cas. Taux = 9/12 = 75%</div>
+
+   <h3>TD3 Ex6 — Adresses Physiques avec LRU ⭐</h3>
+   <div class="def purple">MC=768 mots (3 cases × 256), VM=2048, page=256 mots, Pgm=1280 mots.<br>
+   Séquence : 250,257,550,770,260,230,360,1000,1030,1020<br><br>
+   <strong>Pages (÷256) :</strong> 0,1,2,3,1,0,1,3,4,3 → <strong>Chaîne pages = {0,1,2,3,1,0,1,3,4,3}</strong><br>
+   <strong>Mots gaspillés :</strong> ⌈1280/256⌉=5 pages, 5×256=1280, gaspillage=<strong>0 mots</strong> (exact)<br><br>
+   LRU 3 cases — résultat : défauts aux positions 1(+),2(+),3(+),4(+),5(-),6(-),7(-),8(+),9(+),10(-) = <strong>6 défauts</strong><br><br>
+   <strong>Traduction @physique :</strong> Après chargement, si Page0→Case0, Page1→Case1, Page2→Case2, Page3→Case1(remplacement LRU)...<br>
+   Ex: @250 → page0, d=250 → Case0 → @phys = 0×256+250 = <strong>250</strong><br>
+   @257 → page1, d=1 → Case1 → @phys = 1×256+1 = <strong>257</strong></div>
+  </div>
+ </div><!-- lang-fr -->
+
+ <div class="lang-ar ar">
+  <div class="card">
+   <div class="card-hdr" style="flex-direction:row-reverse"><span class="card-ico">🧮</span><span class="card-ttl">الفصل 4 — إدارة الذاكرة المركزية</span></div>
+   <div class="al al-w">⭐ هذا الفصل = 8 نقاط في الامتحان ! مهم جداً للحسابات.</div>
+   <h3>الترقيم (Pagination)</h3>
+   <div class="def"><strong>المبدأ:</strong> الذاكرة الفيزيائية تُقسَّم إلى خانات (Cases) بحجم ثابت. البرامج تُقسَّم إلى صفحات (Pages) بنفس الحجم. صفحة واحدة في أي خانة حرة. <span class="c-g chip">ميزة: لا تجزئة خارجية</span></div>
+   <div class="form"><span class="lbl">رقم الصفحة</span><span class="eq">رقم الصفحة = العنوان ÷ حجم الصفحة (قسمة صحيحة)</span></div>
+   <div class="form"><span class="lbl">الإزاحة</span><span class="eq">d = العنوان MOD حجم الصفحة</span></div>
+   <div class="form"><span class="lbl">العنوان الفيزيائي</span><span class="eq">@فيزيائي = (رقم الخانة × حجم الصفحة) + d</span></div>
+   <h3>خوارزميات الاستبدال</h3>
+   <ul>
+    <li><span class="c-r chip">FIFO</span> — نستبدل الصفحة الأقدم في الذاكرة</li>
+    <li><span class="c-y chip">Optimal</span> — نستبدل الصفحة التي لن تُستخدم أطول وقت (نظري) → أقل عدد أخطاء</li>
+    <li><span class="c-g chip">LRU ⭐</span> — نستبدل الصفحة الأقل استخداماً مؤخراً → أفضل عملياً</li>
+    <li><span class="c-p chip">LFU/MFU</span> — بناءً على عدد الاستخدامات</li>
+   </ul>
+   <div class="al al-w">إذا كان حجم الذاكرة = خانة واحدة → كل مرجع = خطأ صفحة</div>
+  </div>
+ </div>
+</div>
+
+<!-- ===================== CH3: INTERRUPTIONS ===================== -->
+<div class="sec" id="ch3i">
+ <div class="lang-fr">
+  <div class="sec-pill">⚡ Chapitre 3 — Gestion des Interruptions <span class="badge">COURS UNIQUEMENT</span><span class="badge badge-warn">Pas de TD → Questions théoriques</span></div>
+  <div class="al al-r">🎯 Le prof dit que ce sera du cours pur. Maîtrisez toutes les définitions, le mécanisme complet, le PSW, LPSW, les types, le vecteur, le contrôleur, le masquage, les SVC.</div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">⚡</span><span class="card-ttl">Définition Complète d'une Interruption</span></div>
+   <div class="def"><strong>Définition exacte :</strong> Une interruption est un <strong>signal</strong> déclenché par un événement externe ou interne à la machine, qui provoque l'<strong>arrêt immédiat</strong> du programme en cours d'exécution — à un point appelé <strong>point observable ou interruptible</strong> (entre deux opérations élémentaires) — au profit d'un programme plus prioritaire appelé <strong>Traitant d'interruption / ISR (Interrupt Service Routine) / RIT (Routine d'Interruption)</strong>. Ensuite, le programme interrompu <strong>reprend son exécution là où il s'était arrêté</strong>.</div>
+   <div class="def orange" style="margin-top:8px"><strong>Pourquoi les interruptions ? (vs Polling)</strong><br>
+   <span class="c-r chip">Polling (ancien)</span> : le CPU vérifie en boucle l'état des ressources → gaspillage de cycles CPU.<br>
+   <span class="c-g chip">Interruption (solution)</span> : <em>au lieu que le CPU contrôle continuellement, c'est la ressource qui informe le CPU au moment significatif</em>. → Économie de temps CPU, meilleure réactivité.</div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">📊</span><span class="card-ttl">2 Modes d'Exécution — Base des Interruptions</span></div>
+   <div class="g2">
+    <div class="def"><strong>Mode Esclave (Utilisateur / User)</strong><br>
+    Accès restreint aux ressources. Certaines instructions interdites (pas d'accès direct aux périphériques). Peut être interrompu. <em>Le programme utilisateur s'exécute dans ce mode.</em><br>
+    → Pour accéder aux ressources protégées : doit passer par <strong>SVC</strong></div>
+    <div class="def orange"><strong>Mode Maître (Superviseur / Noyau / Kernel)</strong><br>
+    Accès sans restriction (mémoire, périphériques, interruptions...). Seul le noyau du SE s'exécute dans ce mode.<br>
+    → Le Traitant d'interruption s'exécute en mode Maître.</div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🔀</span><span class="card-ttl">Types d'Événements et d'Interruptions</span></div>
+   <div class="g2">
+    <div>
+     <h3>🔁 Événements SYNCHRONES (liés au programme)</h3>
+     <div class="def">
+     <strong>1. Déroutements (Traps / Exceptions) :</strong><br>
+     Anomalies dans l'exécution : division par zéro, dépassement de capacité (overflow), instruction interdite, accès zone protégée, instruction inexistante.<br>
+     <em>→ Ne peuvent pas être masqués (seulement supprimés). Traitement immédiat.</em><br><br>
+     <strong>2. Appels au Superviseur (SVC — SuperVisor Call) :</strong><br>
+     Instruction spéciale qui permet à un programme utilisateur d'accéder à un service SE (E/S, allocation mémoire...). <em>Volontaire, synchrone, passage automatique Mode Esclave → Mode Maître.</em>
+     </div>
+    </div>
+    <div>
+     <h3>🎲 Événements ASYNCHRONES (extérieurs)</h3>
+     <div class="def orange">
+     Événements imprévisibles, indépendants du programme en cours :<br><br>
+     <strong>1. Interruptions matérielles externes :</strong><br>
+     • Fin d'opération d'E/S (disque, clavier, réseau...)<br>
+     • Signal d'horloge (clock) → pour le quantum RR<br>
+     • Pannes matérielles<br><br>
+     <strong>Exemples :</strong> Périphériques qui "sonnent" pour dire que leur opération est terminée.
+     </div>
+    </div>
+   </div>
+   <div class="g-wrap">
+   <table class="tbl" style="margin-top:12px">
+    <tr><th>Classe</th><th>Type</th><th>Cause</th><th>Masquable?</th></tr>
+    <tr><td>Interne</td><td>Déroutement (Trap)</td><td>Division/0, overflow, instruction illégale</td><td class="fault">Non</td></tr>
+    <tr><td>Interne</td><td>SVC</td><td>Appel système volontaire</td><td class="hit">Oui</td></tr>
+    <tr><td>Externe</td><td>Matérielle</td><td>Fin E/S, horloge, panne</td><td class="hit">Oui</td></tr>
+   </table>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">⚙️</span><span class="card-ttl">Mécanisme Complet de Gestion d'une Interruption</span></div>
+   
+   <div style="overflow-x:auto">
+   <svg viewBox="0 0 760 110" style="width:100%;max-width:760px;display:block;margin:10px auto">
+    <defs><marker id="a2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3z" fill="#00c8ff"/></marker></defs>
+    <rect x="5" y="35" width="105" height="40" rx="7" fill="#0f1420" stroke="#00c8ff" stroke-width="1.5"/>
+    <text x="57" y="52" text-anchor="middle" fill="#00c8ff" font-size="9.5" font-weight="700">Programme</text>
+    <text x="57" y="66" text-anchor="middle" fill="#00c8ff" font-size="9.5">en exécution</text>
+    <line x1="110" y1="55" x2="148" y2="55" stroke="#ff6b35" stroke-width="2" marker-end="url(#a2)"/>
+    <text x="116" y="47" fill="#ff6b35" font-size="8" font-weight="700">Signal IRQ</text>
+    <rect x="148" y="35" width="110" height="40" rx="7" fill="#0f1420" stroke="#ff6b35" stroke-width="1.5"/>
+    <text x="203" y="52" text-anchor="middle" fill="#ff6b35" font-size="9.5" font-weight="700">Sauvegarde</text>
+    <text x="203" y="66" text-anchor="middle" fill="#ff6b35" font-size="9.5">contexte PSW→MCM</text>
+    <line x1="258" y1="55" x2="296" y2="55" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a2)"/>
+    <rect x="296" y="35" width="115" height="40" rx="7" fill="#0f1420" stroke="#3ddc84" stroke-width="1.5"/>
+    <text x="353" y="52" text-anchor="middle" fill="#3ddc84" font-size="9.5" font-weight="700">Identification</text>
+    <text x="353" y="66" text-anchor="middle" fill="#3ddc84" font-size="9.5">Vecteur d'interruption</text>
+    <line x1="411" y1="55" x2="449" y2="55" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a2)"/>
+    <rect x="449" y="35" width="110" height="40" rx="7" fill="#0f1420" stroke="#c792ea" stroke-width="1.5"/>
+    <text x="504" y="52" text-anchor="middle" fill="#c792ea" font-size="9.5" font-weight="700">Exécution</text>
+    <text x="504" y="66" text-anchor="middle" fill="#c792ea" font-size="9.5">ISR / Traitant (RIT)</text>
+    <line x1="559" y1="55" x2="597" y2="55" stroke="#00c8ff" stroke-width="1.5" marker-end="url(#a2)"/>
+    <rect x="597" y="35" width="115" height="40" rx="7" fill="#0f1420" stroke="#ffcb6b" stroke-width="1.5"/>
+    <text x="654" y="52" text-anchor="middle" fill="#ffcb6b" font-size="9.5" font-weight="700">Restauration</text>
+    <text x="654" y="66" text-anchor="middle" fill="#ffcb6b" font-size="9.5">LPSW(ancien-PSW)</text>
+   </svg>
+   </div>
+
+   <h3>Structure d'un Traitant d'Interruption (RIT) — Structure Exacte à Connaître :</h3>
+   <div class="def green"><code>Traitant_Iti :</code><br>
+   <strong>1.</strong> Sauvegarder le grand contexte (registres généraux) → <code>Sauver(Zone_i / PCB)</code><br>
+   <strong>2.</strong> Traiter la cause de l'interruption (programme spécifique)<br>
+   <strong>3.</strong> Restaurer le grand contexte → <code>Restaurer(Zone_i / PCB)</code><br>
+   <strong>4.</strong> Restaurer le mode d'exécution + charger le compteur ordinal → <code>LPSW(ancien-mep-Iti)</code><br>
+   <em>→ Retour automatique au programme interrompu</em></div>
+
+   <h3>Structure d'un SVC (Appel Superviseur) — À Connaître :</h3>
+   <div class="def purple"><code>Traitant_SVC :</code><br>
+   1. Sauver le contexte du programme demandeur<br>
+   2. Vérifier la nature de la requête<br>
+   3. Vérifier les arguments (paramètres)<br>
+   4. Vérifier les droits du demandeur<br>
+   5. Exécuter la demande<br>
+   6. Restaurer le contexte du demandeur<br>
+   7. Retour vers le demandeur</div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🧠</span><span class="card-ttl">PSW, Contexte et LPSW ⭐ Très important</span></div>
+   <div class="g2">
+    <div>
+     <div class="def"><strong>Contexte du Processeur = 2 parties :</strong><br>
+     • <strong>Grand Contexte :</strong> registres généraux (modifiables par le programme)<br>
+     • <strong>Petit Contexte :</strong> MEP / PSW (registres spéciaux, inaccessibles par l'utilisateur)<br><br>
+     <strong>MEP / PSW (Mot d'État du Processeur / Processor Status Word) :</strong><br>
+     Contient 4 champs :<br>
+     <span class="c-o chip">Activité</span> Actif ou En Attente<br>
+     <span class="c-b chip">Mode</span> Maître ou Esclave<br>
+     <span class="c-p chip">Masquage</span> Masqué ou Démasqué<br>
+     <span class="c-y chip">C.O.</span> Compteur Ordinal = adresse prochaine instruction</div>
+    </div>
+    <div>
+     <div class="def orange"><strong>Commutation de contexte lors d'une interruption iti :</strong><br>
+     (a) Ranger le PSW courant → <code>Ancien_MEP_iti</code><br>
+     (b) Charger un nouveau PSW → <code>Nouveau_MEP_iti</code><br>
+     Le Compteur Ordinal prend l'adresse du traitant → exécution du RIT<br><br>
+     <strong>LPSW (Load Process Status Word) :</strong><br>
+     Instruction qui charge l'ancien PSW sauvegardé → restaure l'état exact du processeur → le programme interrompu reprend exactement où il s'était arrêté.<br>
+     <em>C'est le mécanisme de "retour de l'interruption".</em></div>
+    </div>
+   </div>
+
+   <h3>Vecteur d'Interruptions</h3>
+   <div class="def green">Table en mémoire (zone basse) qui associe chaque N° d'interruption k à l'<strong>adresse du traitant</strong> correspondant.<br>
+   <code>vi[k] = adresse du Traitant de l'interruption k</code><br>
+   Lors d'une interruption : le CPU reçoit un index k → accède à vi[k] → saute au traitant.<br>
+   <span class="imp">Le vecteur d'interruptions est dans une zone inaccessible aux programmes utilisateurs.</span></div>
+
+   <h3>Contrôleur d'Interruptions</h3>
+   <div class="def purple">Circuit spécial de la carte mère (hors CPU). Reçoit les IRQ (Interrupt ReQuest) des périphériques, les met en file d'attente, les envoie <strong>une par une</strong> au CPU via la broche INTR.<br>
+   Avant d'envoyer la suivante : attend le signal INTA (Interrupt Acknowledge) du CPU.<br>
+   <em>→ Sans le contrôleur : il faudrait une broche par périphérique sur le CPU.</em></div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🎛️</span><span class="card-ttl">Priorités, Masquage et États des Interruptions</span></div>
+   <div class="g2">
+    <div>
+     <div class="def"><strong>Priorité 0 = la plus haute (la plus urgente)</strong><br>
+     Priorité N = la plus basse.<br>
+     Si plusieurs interruptions simultanées → la plus prioritaire est traitée en premier.<br>
+     Le traitant d'une interruption peut être <strong>lui-même interrompu</strong> par une interruption de priorité supérieure → <strong>Interruptions en cascade</strong></div>
+    </div>
+    <div>
+     <div class="def orange">
+     <strong>3 États d'un niveau d'interruption :</strong><br>
+     <span class="c-r chip">Masqué</span> : mémorisée mais non traitée (retardée). Les interruptions de même niveau ou niveau inférieur sont masquées pendant le traitement d'une interruption.<br>
+     <span class="c-g chip">Armé</span> : peut interrompre le CPU.<br>
+     <span class="c-r chip">Désarmé</span> : désactivé, demandes perdues (comme si la cause n'existe pas).<br>
+     <span class="c-b chip">En attente</span> : peut être prise en compte si : aucune priorité supérieure active ET CPU dans un point interruptible.</div>
+    </div>
+   </div>
+   <div class="al al-i">📌 Registre d'interruption : chaque type d'interruption a 1 bit. Un périphérique peut seulement modifier son propre bit.</div>
+  </div>
+ </div><!-- lang-fr -->
+
+ <div class="lang-ar ar">
+  <div class="card">
+   <div class="card-hdr" style="flex-direction:row-reverse"><span class="card-ico">⚡</span><span class="card-ttl">الفصل 3 — إدارة الانقطاعات (Cours فقط)</span></div>
+   <div class="al al-r">🎯 لا يوجد TD لهذا الفصل → أسئلة نظرية بحتة. يجب حفظ كل التعريفات والآلية الكاملة.</div>
+   <div class="def"><strong>تعريف الانقطاع:</strong> إشارة ناتجة عن حدث داخلي أو خارجي تُوقف تنفيذ البرنامج الحالي فوراً عند نقطة قابلة للانقطاع، لتنفيذ برنامج أكثر أولوية يُسمى مُعالج الانقطاع (ISR/RIT). بعد الانتهاء، يستأنف البرنامج المنقطع من حيث توقف.</div>
+   <div class="def orange" style="margin-top:8px"><strong>لماذا الانقطاعات؟</strong><br>بدلاً من أن يتحقق المعالج باستمرار (Polling = مضيعة وقت)، تُبلّغ الموارد المعالجَ فقط عند الحاجة → توفير في وقت المعالج.</div>
+   <h3>أنواع الأحداث</h3>
+   <ul>
+    <li><strong>متزامنة (Synchrones):</strong> دوّار (Trap) — قسمة على صفر، تجاوز، تعليمة محظورة. واستدعاء المشرف (SVC).</li>
+    <li><strong>غير متزامنة (Asynchrones):</strong> نهاية عملية إدخال/إخراج، إشارة الساعة، أعطال مادية.</li>
+   </ul>
+   <h3>المفاهيم الأساسية للحفظ</h3>
+   <ul>
+    <li><strong>PSW / MEP :</strong> سجل يحتوي على (الحالة، النمط، القناع، العداد الترتيبي). يُحفظ عند كل انقطاع.</li>
+    <li><strong>LPSW :</strong> تعليمة تُعيد تحميل PSW المحفوظ → استئناف البرنامج المنقطع.</li>
+    <li><strong>متجه الانقطاعات :</strong> جدول يربط رقم الانقطاع k بعنوان معالجه vi[k].</li>
+    <li><strong>متحكم الانقطاعات :</strong> دائرة إلكترونية تستقبل طلبات IRQ من الملحقات وترسلها واحدة تلو الأخرى للمعالج.</li>
+    <li><strong>الإخفاء (Masquage) :</strong> تعطيل مؤقت لانقطاع → يُحفظ ثم يُعالج لاحقاً.</li>
+    <li><strong>التجريح (Armement) :</strong> تفعيل انقطاع. نزع التجريح → طلبات مفقودة.</li>
+    <li><strong>SVC :</strong> تعليمة تتيح لبرنامج المستخدم طلب خدمة من نظام التشغيل (انتقال تلقائي: عبد→سيد).</li>
+   </ul>
+   <h3>هيكل مُعالج الانقطاع (RIT)</h3>
+   <div class="def green">1. حفظ السياق الكبير (المسجلات العامة) — Sauver(Zone)<br>
+   2. معالجة سبب الانقطاع<br>
+   3. استعادة السياق الكبير — Restaurer(Zone)<br>
+   4. LPSW(ancien-MEP) → العودة للبرنامج المنقطع</div>
+  </div>
+ </div>
+</div>
+
+<!-- ===================== FORMULES ===================== -->
+<div class="sec" id="calc">
+ <div class="lang-fr">
+  <div class="sec-pill">🔢 Page des Formules &amp; Règles de Calcul — Tout pour le 20/20</div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">⏱️</span><span class="card-ttl">Formules Ordonnancement</span></div>
+   <div class="g2">
+    <div>
+     <div class="form"><span class="lbl">TT — Turnaround / Temps de Traitement</span><span class="eq">TT = Temps_Fin - Temps_Arrivée_en_MC</span></div>
+     <div class="form"><span class="lbl">TA — Waiting Time / Temps d'Attente</span><span class="eq">TA = TT - Burst_Time (temps d'exécution)</span></div>
+     <div class="form"><span class="lbl">TR — Response Time / Temps de Réponse</span><span class="eq">TR = Temps_Début_1er_Exec - Temps_Arrivée_MC</span></div>
+     <div class="form"><span class="lbl">Moyennes</span><span class="eq">TMT = Σ(TT_i) / N &nbsp;&nbsp; TMA = Σ(TA_i) / N</span></div>
+    </div>
+    <div>
+     <div class="al al-w">📌 Temps_Arrivée_en_MC = instant où le LTS charge le programme en mémoire = instant où il devient processus.<br>Ce n'est pas forcément l'instant de sa demande!</div>
+     <div class="def orange" style="margin-top:8px"><strong>Règle SJF Long Terme :</strong> trier les programmes par ordre de burst_time croissant dans leur file de partition.</div>
+     <div class="def green" style="margin-top:8px"><strong>Règle SJF Court Terme :</strong> parmi les processus Prêts en MC, choisir celui avec le burst le plus court. Égalité → FCFS.</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">📄</span><span class="card-ttl">Formules Pagination</span></div>
+   <div class="g2">
+    <div>
+     <div class="form"><span class="lbl">Numéro de page</span><span class="eq">N°Page = Adresse DIV Taille_Page<br>(quotient entier de la division)</span></div>
+     <div class="form"><span class="lbl">Déplacement (offset)</span><span class="eq">d = Adresse MOD Taille_Page<br>(reste de la division)</span></div>
+     <div class="form"><span class="lbl">Adresse Physique</span><span class="eq">@Phys = (N°Case_dans_table × Taille_Page) + d</span></div>
+    </div>
+    <div>
+     <div class="form"><span class="lbl">Nombre de pages d'un processus</span><span class="eq">Nb_Pages = ⌈ Taille_Proc / Taille_Page ⌉<br>(arrondi supérieur)</span></div>
+     <div class="form"><span class="lbl">Fragmentation interne (mots gaspillés)</span><span class="eq">Frag = (Nb_Pages × Taille_Page) - Taille_Proc<br>= Taille_Page - (Taille_Proc MOD Taille_Page)<br>Si MOD = 0 → Frag = 0</span></div>
+    </div>
+   </div>
+   <div class="al al-w" style="margin-top:12px">⚠️ Si la dernière page n'apparaît <em>jamais</em> dans la chaîne de références → elle n'est jamais chargée → <strong>pas de gaspillage de cases</strong> (mais la fragmentation interne existe quand même dans la page).</div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🧩</span><span class="card-ttl">Segmentation — Formule</span></div>
+   <div class="form"><span class="lbl">Adresse Physique (segmentation)</span><span class="eq">@Phys = Base[N°Segment] + Déplacement d<br>Condition : d &lt; Limite[N°Segment] (sinon erreur!)</span></div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">🔄</span><span class="card-ttl">Méthode Pas-à-Pas — LRU, FIFO, Optimal</span></div>
+   <div class="g3">
+    <div class="def"><strong>🔴 FIFO — Méthode :</strong><br>
+    1. Défaut → chercher une case vide.<br>
+    2. Si plein → expulser la page entrée <strong>la première</strong> (la plus ancienne).<br>
+    Tenir un pointeur circulaire ou noter l'ordre d'entrée.</div>
+    <div class="def orange"><strong>🟢 LRU — Méthode :</strong><br>
+    1. Défaut → chercher une case vide.<br>
+    2. Si plein → expulser la page <strong>la moins récemment utilisée</strong> (la plus longtemps non référencée).<br>
+    Regarder en arrière dans la chaîne.</div>
+    <div class="def green"><strong>🔵 Optimal — Méthode :</strong><br>
+    1. Défaut → chercher une case vide.<br>
+    2. Si plein → expulser la page dont la <strong>prochaine utilisation est la plus éloignée</strong> dans le futur.<br>
+    Si une page ne sera plus utilisée → c'est elle la victime.</div>
+   </div>
+   <div class="al al-i" style="margin-top:12px">💡 <strong>Ordre des défauts (du + efficace au - efficace) :</strong> Optimal ≤ LFU ≤ LRU ≤ FIFO ≤ MFU</div>
+  </div>
+
+  <div class="card">
+   <div class="card-hdr"><span class="card-ico">⚡</span><span class="card-ttl">Points Clés à Retenir — Distinctions Importantes</span></div>
+   <div class="g2">
+    <div>
+     <div class="def"><strong>Scheduler vs Dispatcher :</strong><br>
+     Scheduler (STS) = <em>choisit</em> quel processus aura le CPU.<br>
+     Dispatcher = <em>donne réellement</em> le CPU au processus choisi (charge les registres, change le mode).</div>
+     <div class="def orange" style="margin-top:8px"><strong>Préemptif vs Non-préemptif :</strong><br>
+     Non-préemptif : processus garde CPU jusqu'à fin ou blocage volontaire.<br>
+     Préemptif : CPU peut être retiré à tout moment (quantum RR, nouveau processus plus court, priorité supérieure).</div>
+    </div>
+    <div>
+     <div class="def green"><strong>Fragmentation Interne vs Externe :</strong><br>
+     Interne : espace perdu DANS une partition/page déjà allouée.<br>
+     Externe : espace libre total suffisant mais dispersé en petits morceaux inutilisables.</div>
+     <div class="def purple" style="margin-top:8px"><strong>Programme → Processus :</strong><br>
+     Le programme devient processus au moment où le LTS le <strong>charge en mémoire centrale</strong> et crée son PCB. Pas à l'instant de sa demande!</div>
+    </div>
+   </div>
+  </div>
+ </div><!-- lang-fr -->
+
+ <div class="lang-ar ar">
+  <div class="card">
+   <div class="card-hdr" style="flex-direction:row-reverse"><span class="card-ico">🔢</span><span class="card-ttl">صفحة الصيغ والحسابات</span></div>
+   <h3>صيغ الجدولة</h3>
+   <div class="form"><span class="lbl">زمن المعالجة (Turnaround)</span><span class="eq">TT = وقت الانتهاء - وقت الوصول للذاكرة</span></div>
+   <div class="form"><span class="lbl">زمن الانتظار (Waiting Time)</span><span class="eq">TA = TT - زمن التنفيذ الفعلي</span></div>
+   <div class="form"><span class="lbl">زمن الاستجابة (Response Time)</span><span class="eq">TR = وقت أول تنفيذ - وقت الوصول للذاكرة</span></div>
+   <h3>صيغ الترقيم</h3>
+   <div class="form"><span class="lbl">رقم الصفحة</span><span class="eq">N°Page = العنوان ÷ حجم الصفحة (قسمة صحيحة)</span></div>
+   <div class="form"><span class="lbl">الإزاحة</span><span class="eq">d = العنوان MOD حجم الصفحة</span></div>
+   <div class="form"><span class="lbl">العنوان الفيزيائي</span><span class="eq">@Phys = (رقم الخانة × حجم الصفحة) + d</span></div>
+   <div class="form"><span class="lbl">التجزئة الداخلية</span><span class="eq">تجزئة = حجم الصفحة - (حجم البرنامج MOD حجم الصفحة)<br>إذا MOD=0 → لا تجزئة</span></div>
+   <div class="form"><span class="lbl">العنوان الفيزيائي (التجزئة)</span><span class="eq">@Phys = Base[S] + d &nbsp;&nbsp;شرط: d < حجم[S]</span></div>
+  </div>
+ </div>
+</div>
+
+<!-- ===================== EXAM ===================== -->
+<div class="sec" id="exam">
+ <div class="lang-fr">
+  <div class="sec-pill">📝 Examen d'Entraînement — Style Exacte Contrôle 2025</div>
+  <div class="al al-r">🎯 Examen difficile selon le prof. Ch2+Ch4 : exercices. Ch3 : cours. Essayez de répondre avant de voir la correction !</div>
+
+  <!-- EX1 -->
+  <div class="card" style="border-left:3px solid var(--c1)">
+   <h3 style="color:var(--c1);font-size:1.05rem">📋 Exercice 1 — Gestion des Processus Multi-CPU (12 pts)</h3>
+   <p>Système multiprogrammé avec <strong>2 CPUs (CPU1 prioritaire)</strong>. Mémoire centrale = <strong>480 MB</strong> gérée par <strong>partitions fixes</strong> : P1=100MB, P2=60MB, P3=320MB. <strong>LTS=SJF</strong>, <strong>STS=SJF</strong>. 6 programmes arrivent à t=0 :</p>
+   <div class="g-wrap"><table class="tbl"><tr><th>Pgm</th><th>Taille</th><th>Burst</th></tr>
+   <tr><td>Pgm1</td><td>80MB</td><td>8</td></tr><tr><td>Pgm2</td><td>55MB</td><td>3</td></tr>
+   <tr><td>Pgm3</td><td>250MB</td><td>12</td></tr><tr><td>Pgm4</td><td>45MB</td><td>5</td></tr>
+   <tr><td>Pgm5</td><td>200MB</td><td>7</td></tr><tr><td>Pgm6</td><td>30MB</td><td>2</td></tr></table></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">1</div><div class="eq-txt">Remplir les files d'attente en appliquant SJF Long-Terme (chaque programme → partition la plus petite qui peut le contenir, trié par burst croissant)</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ Méthode :</strong> Chaque programme → partition ≥ sa taille. SJF = trier par burst croissant dans chaque file.<br><br>
+   <span class="c-b chip">Partition 100MB</span> : peut contenir Pgm1(80), Pgm2(55), Pgm4(45), Pgm6(30)<br>
+   Trié SJF : Pgm6(2) → Pgm2(3) → Pgm4(5) → Pgm1(8)<br><br>
+   <span class="c-g chip">Partition 60MB</span> : peut contenir Pgm2(55), Pgm4(45), Pgm6(30)<br>
+   <em>→ Mais ces pgms sont déjà dans P1. On assigne chaque pgm à la PLUS PETITE partition qui peut le contenir :</em><br>
+   Pgm6(30) → P1(60MB est la + petite contenant 30? Non P1=100MB ≥ 30, P2=60MB ≥ 30 → P2=60MB)<br>
+   Pgm2(55) → P2(60MB ≥ 55). Pgm4(45) → P2(60MB ≥ 45). Pgm1(80) → P1(100MB). Pgm5(200) → P3(320). Pgm3(250) → P3(320).<br><br>
+   <strong>File P1(100MB) [SJF] :</strong> Pgm1(burst=8) → seul<br>
+   <strong>File P2(60MB) [SJF] :</strong> Pgm6(2) → Pgm4(5) → Pgm2(3) → trié : Pgm6(2), Pgm2(3), Pgm4(5)<br>
+   <strong>File P3(320MB) [SJF] :</strong> Pgm5(7) → Pgm3(12)</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">2a</div><div class="eq-txt">Quel programme-système attribue les processus aux CPUs ? Lequel est prioritaire ?</div><div class="eq-pts">1 pt</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ Le Dispatcher (Répartiteur)</strong><br>
+   C'est le programme système du SE qui donne concrètement le CPU à un processus (charge les registres depuis PCB, change le mode, saute à l'adresse d'exécution).<br>
+   <strong>CPU1 est prioritaire</strong> (configuré ainsi dans ce système).</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">2b</div><div class="eq-txt">Tracer le diagramme de Gantt SJF Court-Terme avec 2 CPUs</div><div class="eq-pts">4 pts</div></div>
+   <div class="eq-body"><p><em>t=0 : processus chargés en MC (LTS les charge tous car ils arrivent à t=0). CPU1 prioritaire. SJF parmi tous les prêts.</em></p>
+   <button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ À t=0, processus Prêts triés SJF :</strong> P6(2), P2(3), P4(5), P5(7), P1(8), P3(12)<br>
+   CPU1 prend le + court = P6(burst=2). CPU2 prend le suivant = P2(burst=3).<br>
+   <strong>t=2 :</strong> P6 fini. CPU1 (libre) → prend P4(5). CPU2 continue P2.<br>
+   <strong>t=3 :</strong> P2 fini. CPU2 (libre) → prend P5(7).<br>
+   <strong>t=7 :</strong> P4 fini (2+5=7). CPU1 (libre) → prend P1(8).<br>
+   <strong>t=10 :</strong> P5 fini (3+7=10). CPU2 (libre) → prend P3(12).<br>
+   <strong>t=15 :</strong> P1 fini (7+8=15). CPU1 libre, P3 toujours en cours sur CPU2.<br>
+   <strong>t=22 :</strong> P3 fini (10+12=22).<br>
+   <div class="g-wrap"><div class="g-cont">
+   <div class="g-row"><div class="g-lbl">CPU1</div><div style="display:flex">
+    <div class="g-blk" style="width:20px;background:#f07178">P6</div>
+    <div class="g-blk" style="width:50px;background:#ff6b35">P4</div>
+    <div class="g-blk" style="width:80px;background:#00c8ff;color:#000">P1</div>
+    <div class="g-blk" style="width:70px;background:#253050;color:var(--muted);font-size:.55rem">libre</div>
+   </div></div>
+   <div class="g-row"><div class="g-lbl">CPU2</div><div style="display:flex">
+    <div class="g-blk" style="width:30px;background:#ffcb6b;color:#000">P2</div>
+    <div class="g-blk" style="width:70px;background:#3ddc84;color:#000">P5</div>
+    <div class="g-blk" style="width:120px;background:#c792ea">P3</div>
+   </div></div>
+   <div class="g-row"><div class="g-lbl" style="font-size:.6rem">t=</div><div style="display:flex">
+    <div class="g-tick" style="width:20px">0..2</div><div class="g-tick" style="width:10px">3</div>
+    <div class="g-tick" style="width:40px">..7</div><div class="g-tick" style="width:10px">10</div>
+    <div class="g-tick" style="width:65px">..15</div><div class="g-tick" style="width:75px">..22</div>
+   </div></div>
+   </div></div></div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">2c</div><div class="eq-txt">Calculer TT, TR, TA pour chaque processus et les moyennes</div><div class="eq-pts">3 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ Tableau complet :</strong>
+   <div class="g-wrap"><table class="tbl">
+   <tr><th>Proc</th><th>Arr. MC</th><th>Début</th><th>Fin</th><th>Burst</th><th>TT</th><th>TR</th><th>TA</th></tr>
+   <tr><td>P6</td><td>0</td><td>0</td><td>2</td><td>2</td><td class="hit">2</td><td class="hit">0</td><td class="hit">0</td></tr>
+   <tr><td>P2</td><td>0</td><td>0</td><td>3</td><td>3</td><td class="hit">3</td><td class="hit">0</td><td class="hit">0</td></tr>
+   <tr><td>P4</td><td>0</td><td>2</td><td>7</td><td>5</td><td class="evict">7</td><td class="evict">2</td><td class="evict">2</td></tr>
+   <tr><td>P5</td><td>0</td><td>3</td><td>10</td><td>7</td><td class="evict">10</td><td class="evict">3</td><td class="evict">3</td></tr>
+   <tr><td>P1</td><td>0</td><td>7</td><td>15</td><td>8</td><td class="fault">15</td><td class="fault">7</td><td class="fault">7</td></tr>
+   <tr><td>P3</td><td>0</td><td>10</td><td>22</td><td>12</td><td class="fault">22</td><td class="fault">10</td><td class="fault">10</td></tr>
+   </table></div>
+   <strong>TMT = (2+3+7+10+15+22)/6 = 59/6 ≈ 9.83</strong><br>
+   <strong>TMA = (0+0+2+3+7+10)/6 = 22/6 ≈ 3.67</strong></div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">3</div><div class="eq-txt">À quel instant les programmes deviennent-ils des processus ? Justifier.</div><div class="eq-pts">1 pt</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ Un programme devient processus quand il est chargé en mémoire centrale (LTS lui alloue une partition et crée son PCB).</strong><br>
+   Tous arrivent à t=0 et toutes les partitions peuvent être remplies simultanément :<br>
+   t(Pgm1)=0, t(Pgm2)=0, t(Pgm3)=0, t(Pgm4)=0, t(Pgm5)=0, t(Pgm6)=0<br>
+   <em>Note : si les partitions étaient insuffisantes pour tous, certains attendraient en file (ils resteraient programmes jusqu'à leur chargement).</em></div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">4</div><div class="eq-txt">Inconvénients des partitions fixes + solutions</div><div class="eq-pts">1 pt</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ Inconvénients :</strong><br>
+   1. <strong>Fragmentation interne</strong> : espace gaspillé à l'intérieur d'une partition (ex: Pgm6=30MB dans P2=60MB → 30MB perdus).<br>
+   2. <strong>Files multiples</strong> : un processus peut attendre dans sa file alors qu'une autre partition est libre.<br>
+   3. <strong>Nombre limité de processus</strong> = nombre de partitions.<br><br>
+   <strong>Solutions :</strong><br>
+   1. File unique avec Best-Fit (plus petite partition libre suffisante).<br>
+   2. Partitions variables (dynamiques) → fragmentation externe → compactage.<br>
+   3. Pagination → pas de fragmentation externe.</div></div></div>
+  </div>
+
+  <!-- EX2 -->
+  <div class="card" style="border-left:3px solid var(--c2)">
+   <h3 style="color:var(--c2);font-size:1.05rem">🧮 Exercice 2 — Pagination &amp; Mémoire Virtuelle (8 pts)</h3>
+   <p>Programme de <strong>460 mots</strong>. Taille d'une page = <strong>100 mots</strong>. MC disponible = <strong>3 cases</strong>.<br>
+   Séquence d'adresses : <code>10, 11, 104, 170, 73, 309, 185, 245, 246, 434, 458, 364</code></p>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">1</div><div class="eq-txt">Calculer le numéro de page pour chaque adresse logique</div><div class="eq-pts">1 pt</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ N°Page = Adresse DIV 100 :</strong><br>
+   10÷100=<strong>0</strong> | 11÷100=<strong>0</strong> | 104÷100=<strong>1</strong> | 170÷100=<strong>1</strong> | 73÷100=<strong>0</strong> | 309÷100=<strong>3</strong><br>
+   185÷100=<strong>1</strong> | 245÷100=<strong>2</strong> | 246÷100=<strong>2</strong> | 434÷100=<strong>4</strong> | 458÷100=<strong>4</strong> | 364÷100=<strong>3</strong><br>
+   <strong>Chaîne de pages = {0, 0, 1, 1, 0, 3, 1, 2, 2, 4, 4, 3}</strong></div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">2</div><div class="eq-txt">Calculer les mots gaspillés</div><div class="eq-pts">1 pt</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ Nb_Pages = ⌈460/100⌉ = 5 pages (pages 0,1,2,3,4)</strong><br>
+   Espace total pages = 5 × 100 = 500 mots<br>
+   Gaspillage = 500 - 460 = <strong>40 mots</strong> (dans la dernière page, la page 4)<br>
+   <em>La page 4 contient les mots 400 à 459 → les mots 460 à 499 sont vides.</em></div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">3</div><div class="eq-txt">Quelle taille de MC provoque autant de défauts que de références ? Justifier.</div><div class="eq-pts">1 pt</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ 1 seule case</strong><br>
+   Avec 1 case : chaque page référencée remplace immédiatement la précédente → chaque accès est un défaut de page.<br>
+   Nb_Défauts = Nb_Références = <strong>12 défauts</strong></div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">4a</div><div class="eq-txt">Remplir la table LRU avec 3 cases — chaîne {0,0,1,1,0,3,1,2,2,4,4,3}</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ LRU (3 cases) :</strong>
+   <div class="g-wrap"><table class="tbl">
+   <tr><th>Ref</th><th>0</th><th>0</th><th>1</th><th>1</th><th>0</th><th>3</th><th>1</th><th>2</th><th>2</th><th>4</th><th>4</th><th>3</th></tr>
+   <tr><td>C0</td><td class="fault">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="evict">2</td><td>2</td><td>2</td><td>2</td><td class="evict">3</td></tr>
+   <tr><td>C1</td><td></td><td></td><td class="fault">1</td><td>1</td><td>1</td><td class="evict">3</td><td class="evict">1</td><td>1</td><td>1</td><td class="evict">4</td><td>4</td><td>4</td></tr>
+   <tr><td>C2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+   <tr><td>Défaut</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="hit">-</td><td class="fault">+</td><td class="fault">+</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td></tr>
+   </table></div>
+   <div class="al al-g"><strong>LRU → 7 défauts de pages</strong>. Taux = 7/12 ≈ 58.3%</div>
+   <strong>Explication des remplacements :</strong><br>
+   Ref=3: cases pleines {0,1,—} → 2 cases. Attends... à ref=3(t=6), cases = {0,1} → 2 pleines. Dernière utilisation : 0 à t=5, 1 à t=3. LRU = page1 → remplacer par 3.<br>
+   Ref=1(t=7): pages {0,3} → 0 récent(t=5), 3(t=6). LRU=0? Non, chercher: avant t=7, page0 à t=5, page3 à t=6 → LRU=page0 → remplacer par 1.<br>
+   Ref=2(t=8): {3,1} → 3(t=6),1(t=7). LRU=3 → remplacer par 2.<br>
+   Ref=4(t=10): {1,2} → 1(t=7),2(t=9). LRU=1 → remplacer par 4.<br>
+   Ref=3(t=12): {2,4} → 2(t=9),4(t=11). LRU=2 → remplacer par 3.</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">4b</div><div class="eq-txt">Remplir la table FIFO avec 3 cases</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>✅ FIFO (3 cases) :</strong>
+   <div class="g-wrap"><table class="tbl">
+   <tr><th>Ref</th><th>0</th><th>0</th><th>1</th><th>1</th><th>0</th><th>3</th><th>1</th><th>2</th><th>2</th><th>4</th><th>4</th><th>3</th></tr>
+   <tr><td>C0</td><td class="fault">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="evict">3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+   <tr><td>C1</td><td></td><td></td><td class="fault">1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="evict">2</td><td>2</td><td>2</td><td>2</td><td class="evict">3→?</td></tr>
+   <tr><td>C2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="evict">4</td><td>4</td><td>4</td></tr>
+   <tr><td>Défaut</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="fault">+</td><td class="hit">-</td><td class="hit">-</td></tr>
+   </table></div>
+   <div class="al al-g"><strong>FIFO → 6 défauts de pages</strong>. Taux = 6/12 = 50%</div>
+   <em>FIFO avec 3 cases est meilleur que LRU ici (6 &lt; 7) — phénomène de Bélády peut inverser les résultats.</em></div></div></div>
+  </div>
+
+  <!-- EX3 CH3 COURS -->
+  <div class="card" style="border-left:3px solid var(--c4)">
+   <h3 style="color:var(--c4);font-size:1.05rem">⚡ Exercice 3 — Questions de Cours : Interruptions (possible exam)</h3>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">Q1</div><div class="eq-txt">Définissez une interruption. Pourquoi est-elle préférable au polling ?</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>Définition :</strong> Une interruption est un signal déclenché par un événement externe ou interne à la machine, qui provoque l'arrêt immédiat du programme en cours (à un point observable/interruptible), pour exécuter un traitant d'interruption (ISR/RIT). Après le traitement, le programme interrompu reprend exactement là où il s'était arrêté.<br><br>
+   <strong>Avantage vs Polling :</strong> Le polling oblige le CPU à vérifier en permanence l'état des ressources → gaspillage de cycles CPU. Avec les interruptions, c'est la ressource elle-même qui informe le CPU au moment significatif → économie de temps CPU, réactivité immédiate, meilleure performance globale.</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">Q2</div><div class="eq-txt">Quels sont les 4 champs du PSW / MEP ? Quel est le rôle de l'instruction LPSW ?</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>PSW / MEP contient 4 champs :</strong><br>
+   1. <strong>Activité</strong> : état du CPU (Actif ou En Attente)<br>
+   2. <strong>Mode</strong> : Maître (superviseur) ou Esclave (utilisateur)<br>
+   3. <strong>Masquage</strong> : interruptions activées ou masquées<br>
+   4. <strong>Compteur Ordinal (C.O.)</strong> : adresse de la prochaine instruction à exécuter<br><br>
+   <strong>LPSW (Load Process Status Word) :</strong><br>
+   Instruction qui restaure le PSW sauvegardé (Ancien_MEP_iti) → recharge le contexte du processeur à l'état exact avant l'interruption → le programme interrompu reprend son exécution là où il avait été arrêté. C'est l'acquittement / la "sortie" du traitant d'interruption.</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">Q3</div><div class="eq-txt">Différenciez : Déroutement (Trap), SVC et Interruption matérielle. Donnez un exemple de chaque.</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>Déroutement (Trap / Exception) :</strong><br>
+   Interruption interne synchrone causée par une anomalie dans l'exécution du programme. Ne peut pas être masqué.<br>
+   Exemple : division par zéro, débordement arithmétique, instruction illégale, accès à une zone mémoire protégée.<br><br>
+   <strong>SVC (SuperVisor Call / Appel Superviseur) :</strong><br>
+   Instruction spéciale qui permet à un programme utilisateur (mode Esclave) d'accéder volontairement à un service du SE (mode Maître). Point d'entrée unique et sécurisé vers le noyau.<br>
+   Exemple : demande d'E/S, allocation de mémoire, création d'un processus.<br><br>
+   <strong>Interruption matérielle externe :</strong><br>
+   Interruption asynchrone causée par un périphérique ou un événement extérieur au CPU, imprévisible.<br>
+   Exemple : fin de lecture disque, touche clavier enfoncée, signal d'horloge (expiration du quantum RR).</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">Q4</div><div class="eq-txt">Décrivez le mécanisme de commutation de contexte lors d'une interruption iti. Que contient le vecteur d'interruptions ?</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>Commutation de contexte (hardware, opération indivisible) :</strong><br>
+   (a) Sauvegarder le PSW courant → Ancien_MEP_iti<br>
+   (b) Charger le nouveau PSW → Nouveau_MEP_iti (dont le C.O. pointe vers le traitant de iti)<br>
+   → Le traitant s'exécute et sauvegarde le grand contexte (registres généraux) → Sauver(Zone)<br>
+   → Traitement de la cause → Restaurer(Zone) → LPSW(Ancien_MEP_iti) → reprise du programme.<br><br>
+   <strong>Vecteur d'interruptions :</strong><br>
+   Table en zone basse de la mémoire centrale (inaccessible aux programmes utilisateurs).<br>
+   Structure : <code>vi[k] = @Traitant_de_l'interruption_k</code><br>
+   Chaque case contient l'adresse du traitant correspondant à l'interruption de type k.<br>
+   Permet une identification et un branchement rapide vers le bon traitant.</div></div></div>
+
+   <div class="eq-card"><div class="eq-hdr"><div class="eq-num">Q5</div><div class="eq-txt">Expliquez les états Masqué, Armé/Désarmé. Qu'est-ce que la gestion des interruptions en cascade ?</div><div class="eq-pts">2 pts</div></div>
+   <div class="eq-body"><button class="ans-btn" onclick="tog(this)">👁 Voir Réponse</button>
+   <div class="ans-box"><strong>État Masqué :</strong> L'interruption est mémorisée mais non traitée. Elle est retardée jusqu'à la levée du masquage. Pendant le traitement d'une interruption de priorité P, les interruptions de priorité ≤ P sont automatiquement masquées.<br><br>
+   <strong>État Armé :</strong> L'interruption peut interrompre le CPU normalement.<br>
+   <strong>État Désarmé :</strong> L'interruption est complètement désactivée. Toute demande est perdue (pas mémorisée). Utilisé quand un équipement ne doit plus jamais interrompre.<br><br>
+   <strong>Interruptions en cascade :</strong> Pendant le traitement d'un traitant d'interruption iti, une interruption de priorité supérieure itj peut survenir. itj interrompt le traitant de iti, qui est mis en attente. Le traitant de itj s'exécute, puis retourne au traitant de iti, qui finit, puis retourne au programme original. → Imbrication possible sur plusieurs niveaux selon la hiérarchie des priorités.</div></div></div>
+  </div>
+ </div><!-- lang-fr -->
+
+ <div class="lang-ar ar">
+  <div class="card">
+   <div class="card-hdr" style="flex-direction:row-reverse"><span class="card-ico">📝</span><span class="card-ttl" style="color:var(--c5)">امتحان تدريبي — نفس الأسئلة بالعربية</span></div>
+   <div class="al al-w">الأسئلة موجودة بالفرنسية أعلاه بالإجابات الكاملة. المصطلحات الأساسية بالعربية:</div>
+   <ul>
+    <li><strong>Turnaround (TT)</strong> = زمن المعالجة = وقت الانتهاء - وقت الوصول</li>
+    <li><strong>Waiting Time (TA)</strong> = زمن الانتظار = TT - زمن التنفيذ</li>
+    <li><strong>Response Time (TR)</strong> = زمن الاستجابة = أول لحظة تنفيذ - وقت الوصول</li>
+    <li><strong>Dispatcher</strong> = الموزع — يعطي المعالج فعلياً للعملية المختارة</li>
+    <li><strong>Fragmentation interne</strong> = تجزئة داخلية (داخل التقسيم/الصفحة)</li>
+    <li><strong>Fragmentation externe</strong> = تجزئة خارجية (مساحة حرة مشتتة)</li>
+    <li><strong>Défaut de page</strong> = خطأ الصفحة — الصفحة غير موجودة في الذاكرة</li>
+    <li><strong>ISR / RIT / Traitant</strong> = مُعالج الانقطاع — برنامج يُعالج سبب الانقطاع</li>
+   </ul>
+  </div>
+ </div>
+</div>
+
+</div><!-- .body -->
+<button class="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+function gotoTab(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.getElementById('t-'+id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  document.getElementById('bthm').textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';
+}
+let lang='fr';
+function setLang(l){
+  lang=l;
+  document.getElementById('bfr').classList.toggle('on',l==='fr');
+  document.getElementById('bar').classList.toggle('on',l==='ar');
+  document.body.classList.toggle('show-ar',l==='ar');
+}
+function tog(btn){
+  const b=btn.nextElementSibling;
+  b.classList.toggle('show');
+  btn.textContent=b.classList.contains('show')?'🙈 Masquer':'👁 Voir Réponse';
+}
+</script>
+</body></html>
